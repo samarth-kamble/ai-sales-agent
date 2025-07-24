@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AttendedTypeEnum {
+  REGISTERED
+  ATTENDED
+  ADDED_TO_CART
+  FOLLOW_UP
+  BREAKOUT_ROOM
+  CONVERTED
+}
+
+enum CtaTypeEnum {
+  BUY_NOW
+  BOOK_A_CALL
+}
+
+enum WebinarStatusEnum {
+  SCHEDULED
+  WAITING_ROOM
+  LIVE
+  ENDED
+  CANCELLED
+}
+
+enum CallStatusEnum {
+  PENDING
+  InProgress
+  COMPLETED
+}
+
+model User {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String    @db.VarChar(100)
+  clerkId          String    @unique
+  email            String    @unique
+  profileImage     String
+  webinars         Webinar[] @relation("PresenterWebinars")
+  stripeConnectId  String?   @db.VarChar(255)
+  lastLoginAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  deletedAt        DateTime?
+  subscription     Boolean   @default(false)
+  stripeCustomerId String?   @db.VarChar(255)
+
+  @@index([email])
+  @@index([clerkId])
+}
+
+model Webinar {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title           String            @db.VarChar(255)
+  description     String?           @db.Text
+  startTime       DateTime
+  endTime         DateTime?
+  duration        Int               @default(0) // Duration in minutes
+  webinarStatus   WebinarStatusEnum @default(SCHEDULED)
+  presenterId     String            @db.Uuid
+  presenter       User              @relation("PresenterWebinars", fields: [presenterId], references: [id], onDelete: Cascade)
+  attendances     Attendance[]
+  tags            String[]
+  ctaLabel        String?           @db.VarChar(50)
+  ctaType         CtaTypeEnum
+  ctaUrl          String?           @db.VarChar(255)
+  couponCode      String?           @db.VarChar(50)
+  couponEnabled   Boolean           @default(false)
+  couponExpiry    DateTime?
+  lockChat        Boolean           @default(false)
+  stripeProductId String?           @db.VarChar(255)
+  aiAgentId       String?           @db.Uuid
+  priceId         String?           @db.VarChar(255)
+  recordingUrl    String?
+  thumbnail       String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  deletedAt       DateTime?
+  Attendee        Attendee?         @relation(fields: [attendeeId], references: [id])
+  attendeeId      String?           @db.Uuid
+
+  @@index([presenterId])
+  @@index([aiAgentId])
+  @@index([startTime])
+}
+
+model Attendee {
+  id         String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email      String         @unique
+  name       String         @db.VarChar(100)
+  callStatus CallStatusEnum @default(PENDING)
+  Attendance Attendance[]
+  Webinar    Webinar[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  id           String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  webinarId    String           @db.Uuid
+  joinedAt     DateTime         @default(now())
+  leftAt       DateTime?
+  user         Attendee         @relation(fields: [attendeeId], references: [id])
+  webinar      Webinar          @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+  attendedType AttendedTypeEnum
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  attendeeId   String           @db.Uuid
+  userId       String?          @db.Uuid
+
+  @@unique([attendeeId, webinarId]) // ✅ This enforces 1 attendee per webinar
+  @@index([webinarId])
+  @@index([attendedType])
+}
