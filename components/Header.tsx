@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -11,6 +11,8 @@ import LighteningIcon from "@/components/icons/LighteningIcon";
 const Header = ({ user }: Header) => {
   const pathname = usePathname();
   const router = useRouter();
+
+  if (!user) return redirect("/sign-in");
 
   return (
     <div className="w-full px-4 pt-10 sticky top-0 z-10 flex justify-between items-center flex-wrap gap-4 bg-background">
