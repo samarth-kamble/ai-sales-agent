@@ -31,7 +31,7 @@ const CreateWebinarButton = () => {
       title: "CTA",
       description:
         "Please provide the end-point for your customers through your webinar",
-      component: <CTAStep assistants={[]} stripeProducts={[]} />,
+      component: <CTAStep />,
     },
     {
       id: "additionalInfo",
