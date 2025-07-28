@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { type Header } from "@/types";
 import PurpleIcon from "@/components/icons/PurpleIcon";
 import LighteningIcon from "@/components/icons/LighteningIcon";
+import CreateWebinarButton from "@/components/CreateWebinarButton";
 
 const Header = ({ user }: Header) => {
   const pathname = usePathname();
@@ -34,6 +35,10 @@ const Header = ({ user }: Header) => {
         <PurpleIcon>
           <LighteningIcon />
         </PurpleIcon>
+        {/* 
+         // TODO: Add stripe subscription and create webinar button
+        */}
+        <CreateWebinarButton />
       </div>
     </div>
   );
