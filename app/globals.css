@@ -159,7 +159,7 @@
 }
 
 .iconBackground {
-  border-radius: var(--radius-rounded-md, 0.9rem);
+  border-radius: var(--radius-rounded-md, 0.8rem);
   border: 0.5px solid #a76ef6;
   background: radial-gradient(
       80.86% 125% at 50% 45%,
