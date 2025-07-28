@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { AlertCircle, Check, ChevronRight, Loader2 } from "lucide-react";
 
 import { MultiStepFormProps } from "@/types";
 import { useWebinarStore } from "@/hooks/useWebinarStore";
-import { AlertCircle, Check, ChevronRight, Loader2 } from "lucide-react";
-import { Separator } from "../ui/separator";
-import { Button } from "../ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { createWebinar } from "@/actions/webinar.actions";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 const MultiStepForm = ({ steps, onComplete }: MultiStepFormProps) => {
   const router = useRouter();

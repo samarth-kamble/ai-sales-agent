@@ -1,12 +1,14 @@
 "use client";
-import { useWebinarStore } from "@/hooks/useWebinarStore";
+
 import React, { useState } from "react";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { cn } from "@/lib/utils";
-import { X } from "lucide-react";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { CtaTypeEnum } from "@prisma/client";
+import { X } from "lucide-react";
+
+import { useWebinarStore } from "@/hooks/useWebinarStore";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const CTAStep = () => {
   const [tagInput, setTagInput] = useState("");

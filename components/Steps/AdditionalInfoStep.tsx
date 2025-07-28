@@ -1,10 +1,11 @@
-import { useWebinarStore } from "@/hooks/useWebinarStore";
 import React from "react";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
-import { cn } from "@/lib/utils";
-import { Input } from "../ui/input";
 import { Info } from "lucide-react";
+
+import { useWebinarStore } from "@/hooks/useWebinarStore";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 
 const AdditionalInfoStep = () => {
   const { formData, updateAdditionalInfoField, getStepValidationErrors } =

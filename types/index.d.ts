@@ -1,5 +1,6 @@
-import { Attendee, CtaTypeEnum, User } from "@prisma/client";
+import { Attendee, CtaTypeEnum, User, Webinar } from "@prisma/client";
 import { ValidationErrors } from "@/lib/validation";
+
 interface Header {
   user: User;
 }
@@ -121,3 +122,16 @@ interface MultiStepFormProps {
 }
 
 interface CTAStep {}
+
+interface PageHeader {
+  heading?: string;
+  mainIcon: React.ReactNode;
+  leftIcon: React.ReactNode;
+  rightIcon: React.ReactNode;
+  children?: React.ReactNode;
+  placeholder?: string;
+}
+
+interface WebinarCard {
+  webinar: Webinar;
+}

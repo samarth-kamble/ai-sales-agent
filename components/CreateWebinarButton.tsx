@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Plus } from "lucide-react";
 
 import {
   Dialog,
@@ -7,7 +8,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useWebinarStore } from "@/hooks/useWebinarStore";
-import { Plus } from "lucide-react";
 import MultiStepForm from "./forms/MultiStepForm";
 import BasicInfoStep from "./Steps/BasicInfoStep";
 import CTAStep from "./Steps/CTAStep";
