@@ -135,3 +135,21 @@ interface PageHeader {
 interface WebinarCard {
   webinar: Webinar;
 }
+
+interface PipelineIdPage {
+  params: Promise<{
+    webinarId: string;
+  }>;
+}
+
+interface AttendanceData {
+  count: number;
+  users: Attendee[];
+}
+
+interface PipelineLayout {
+  title: string;
+  count: number;
+  users: Attendee[];
+  tags: string[];
+}

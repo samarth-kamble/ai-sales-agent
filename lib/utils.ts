@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { AttendedTypeEnum } from "@prisma/client";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,3 +26,10 @@ export function combineDateTime(
   result.setHours(hour, minute, 0, 0);
   return result;
 }
+
+export const formatColumnTitle = (columnType: AttendedTypeEnum): string => {
+  return columnType
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};

@@ -57,7 +57,7 @@ const WebinarCard = ({ webinar }: WebinarCard) => {
 
         {/* Pipeline Button */}
         <Link
-          href={"/pipeline"}
+          href={`/webinars/${webinar?.id}/pipeline`}
           className="flex items-center justify-center w-10 h-10 rounded-lg border border-border bg-background hover:bg-accent hover:border-primary/30 transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
           title="View Pipeline"
         >
