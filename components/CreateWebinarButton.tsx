@@ -36,7 +36,7 @@ const CreateWebinarButton = ({ stripeProducts }: Props) => {
       title: "CTA",
       description:
         "Please provide the end-point for your customers through your webinar",
-      component: <CTAStep assistants={[]} stripeProducts={stripeProducts} />,
+      component: <CTAStep stripeProducts={stripeProducts} />,
     },
     {
       id: "additionalInfo",
