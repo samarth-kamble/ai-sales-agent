@@ -156,3 +156,7 @@ interface PipelineLayout {
   users: Attendee[];
   tags: string[];
 }
+
+interface SubscriptionModal {
+  user: User;
+}
