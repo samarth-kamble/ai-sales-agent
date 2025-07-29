@@ -9,13 +9,16 @@ const AuthCallbackPage = async () => {
 
     if (auth.status === 200 || auth.status === 201) {
       redirect("/home");
+    } else {
+      redirect("/");
     }
-
-    redirect("/");
   } catch (error) {
     console.error("Auth callback error:", error);
     redirect("/");
   }
+
+  // This will never execute due to redirects above, but satisfies TypeScript
+  return <div>Redirecting...</div>;
 };
 
 export default AuthCallbackPage;

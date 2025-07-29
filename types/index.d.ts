@@ -1,8 +1,10 @@
 import { Attendee, CtaTypeEnum, User, Webinar } from "@prisma/client";
 import { ValidationErrors } from "@/lib/validation";
+import Stripe from "stripe";
 
 interface Header {
   user: User;
+  stripeProducts: Stripe.Product[] | [];
 }
 
 interface PurpleIcon {
@@ -121,8 +123,9 @@ interface MultiStepFormProps {
   onComplete: (id: string) => void;
 }
 
-interface CTAStep {}
-
+interface CTAStep {
+  stripeProducts: Stripe.Product[] | [];
+}
 interface PageHeader {
   heading?: string;
   mainIcon: React.ReactNode;
@@ -152,4 +155,8 @@ interface PipelineLayout {
   count: number;
   users: Attendee[];
   tags: string[];
+}
+
+interface SubscriptionModal {
+  user: User;
 }
