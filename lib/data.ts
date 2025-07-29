@@ -1,11 +1,6 @@
 import { CallStatusEnum } from "@prisma/client";
-import {
-  HomeIcon,
-  WebcamIcon,
-  Sparkle,
-  SettingsIcon,
-  UserRound,
-} from "lucide-react";
+import { HomeIcon, WebcamIcon, SettingsIcon, UserRound } from "lucide-react";
+import { BsStars } from "react-icons/bs";
 
 export const sidebarData = [
   {
@@ -29,7 +24,7 @@ export const sidebarData = [
   {
     id: 4,
     title: "Ai Agents",
-    icon: Sparkle,
+    icon: BsStars,
     link: "/ai-agents",
   },
 

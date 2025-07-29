@@ -12,7 +12,7 @@ import UserInfoCard from "@/components/UserInfoCard";
 
 const HomePage = () => {
   return (
-    <div className="w-full mx-auto h-full relative mt-10">
+    <div className="w-full mx-auto h-full relative">
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-1/4 w-64 h-64 bg-gradient-radial from-primary/5 to-transparent rounded-full blur-3xl" />

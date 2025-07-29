@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
+
 import "./globals.css";
+
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ClerkProvider from "@/components/providers/ClerkProvider";
 
