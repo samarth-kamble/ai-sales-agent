@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ClerkProvider from "@/components/providers/ClerkProvider";
+import { Toaster } from "sonner";
 
 const iblPlexSans = IBM_Plex_Sans({
   variable: "--font-ibl-plex-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster richColors position="top-left" />
             {children}
           </ThemeProvider>
         </body>

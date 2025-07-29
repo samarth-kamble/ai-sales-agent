@@ -8,8 +8,10 @@ import { type Header } from "@/types";
 import PurpleIcon from "@/components/icons/PurpleIcon";
 import LighteningIcon from "@/components/icons/LighteningIcon";
 import CreateWebinarButton from "@/components/CreateWebinarButton";
+import { StripeElements } from "@/components/Stripe/StripeElements";
+import SubscriptionModal from "@/components/Stripe/SubscriptionModal";
 
-const Header = ({ user }: Header) => {
+const Header = ({ user, stripeProducts }: Header) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -35,10 +37,13 @@ const Header = ({ user }: Header) => {
         <PurpleIcon>
           <LighteningIcon />
         </PurpleIcon>
-        {/* 
-         // TODO: Add stripe subscription and create webinar button
-        */}
-        <CreateWebinarButton />
+        {user.subscription ? (
+          <CreateWebinarButton stripeProducts={stripeProducts} />
+        ) : (
+          <StripeElements>
+            <SubscriptionModal user={user} />
+          </StripeElements>
+        )}
       </div>
     </div>
   );
