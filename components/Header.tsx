@@ -9,7 +9,7 @@ import PurpleIcon from "@/components/icons/PurpleIcon";
 import LighteningIcon from "@/components/icons/LighteningIcon";
 import CreateWebinarButton from "@/components/CreateWebinarButton";
 
-const Header = ({ user }: Header) => {
+const Header = ({ user, stripeProducts }: Header) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -38,7 +38,7 @@ const Header = ({ user }: Header) => {
         {/* 
          // TODO: Add stripe subscription and create webinar button
         */}
-        <CreateWebinarButton />
+        <CreateWebinarButton stripeProducts={stripeProducts} />
       </div>
     </div>
   );
