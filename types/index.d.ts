@@ -160,3 +160,44 @@ interface PipelineLayout {
 interface SubscriptionModal {
   user: User;
 }
+
+interface LiveWebinar {
+  params: Promise<{
+    liveWebinarId: string;
+  }>;
+  searchParams: Promise<{
+    error: string;
+  }>;
+}
+
+interface RenderWebinar {
+  error: string | undefined;
+  user: User | null;
+  webinar: Webinar;
+  apiKey: string;
+  token: string;
+  callId: string;
+}
+
+interface SuccessStep {
+  webinarLink: string;
+  onCreateNew?: () => void;
+  onClose?: () => void;
+}
+
+interface WebinarUpcomingState {
+  webinar: Webinar;
+  currentUser: User | null;
+}
+
+interface CountdownTimer {
+  target: Date;
+  className?: string;
+  webinarId: string;
+  webinarStatus: WebinarStatusEnum;
+}
+
+interface WaitlistComponent {
+  webinarId: string;
+  webinarStatus: WebinarStatusEnum;
+}
