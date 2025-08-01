@@ -5,6 +5,7 @@ import { type WebinarFormState } from "@/types";
 import { onAuthenticateUser } from "./auth.actions";
 import { combineDateTime } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import { WebinarStatusEnum } from "@prisma/client";
 
 export const createWebinar = async (formData: WebinarFormState) => {
   try {
@@ -13,13 +14,12 @@ export const createWebinar = async (formData: WebinarFormState) => {
       throw new Error("User not authenticated");
     }
 
-    //  TODO: Check if user has a subscription
-    // if (!user.user.subscription) {
-    //   return {
-    //     status: 402,
-    //     message: "Subscription required to create a webinar",
-    //   };
-    // }
+    if (!user.user.subscription) {
+      return {
+        status: 402,
+        message: "Subscription required to create a webinar",
+      };
+    }
 
     const presenterId = user.user.id;
 
@@ -117,5 +117,59 @@ export const getWebinarByPresenterId = async (presenterId: string) => {
   } catch (error) {
     console.log("Error getting webinars:", error);
     return [];
+  }
+};
+
+export const getWebinarById = async (webinarId: string) => {
+  try {
+    const webinar = await prismaClient.webinar.findUnique({
+      where: {
+        id: webinarId,
+      },
+      include: {
+        presenter: {
+          select: {
+            id: true,
+            name: true,
+            stripeConnectId: true,
+            profileImage: true,
+          },
+        },
+      },
+    });
+    return webinar;
+  } catch (error) {
+    console.error("Error fetching webinar", error);
+    throw new Error("Error fetching webinar");
+  }
+};
+
+export const changeWebinarStatus = async (
+  webinarId: string,
+  status: WebinarStatusEnum
+) => {
+  try {
+    const webinar = await prismaClient.webinar.update({
+      where: {
+        id: webinarId,
+      },
+      data: {
+        webinarStatus: status,
+      },
+    });
+
+    return {
+      status: 200,
+      success: true,
+      message: "Webinar status updated successfully",
+      data: webinar,
+    };
+  } catch (error) {
+    console.log("Error updating webinar status:", error);
+    return {
+      status: 500,
+      success: false,
+      message: "Internal server error",
+    };
   }
 };
